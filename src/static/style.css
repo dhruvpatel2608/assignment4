@@ -1,3 +1,17 @@
+/* Hide elements with this class */
 .not-visible {
     display: none;
+}
+
+/* Dropzone styling */
+.dz {
+    border: 2px dashed #ccc !important;
+    border-radius: 10px !important;
+    padding: 20px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.dz:hover {
+    background-color: aliceblue !important;
 }

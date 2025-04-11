@@ -18,9 +18,9 @@ const titleInput = document.getElementById('id_title')
 const bodyInput = document.getElementById('id_body')
 
 // Go back when back button is clicked
-backBtn.addEventListener('click', () => {
-    history.back();
-});
+// backBtn.addEventListener('click', () => {
+//     history.back();
+// });
 
 // AJAX call to fetch post detail data
 $.ajax({

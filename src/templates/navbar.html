@@ -1,0 +1,61 @@
+{% url 'posts:main-board' as path_to_home %}
+{% url 'profiles:my-profile' as path_to_my_profile %}
+
+<style>
+  .navbar-custom {
+    background: linear-gradient(to right, #2d4739, #3b5f4c);
+    padding: 14px 30px;
+    border-bottom: 2px solid #1f2e26;
+  }
+
+  .navbar-custom .navbar-brand {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #00000070;
+  }
+
+  .nav-btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 6px 20px;
+    border: 2px solid #ffffff44;
+    color: white;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+  }
+
+  .nav-btn:hover {
+    background-color: #ffffff;
+    color: #2d4739;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+    text-decoration: none;
+  }
+
+  .nav-btn.active {
+    background-color: #ffffff;
+    color: #2d4739;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="{{ path_to_home }}">
+      Posts-proj
+    </a>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex gap-3">
+      <a class="nav-btn {% if request.path == path_to_home %}active{% endif %}" href="{{ path_to_home }}">Home</a>
+      <a class="nav-btn {% if request.path == path_to_my_profile %}active{% endif %}" href="{{ path_to_my_profile }}">My Profile</a>
+    </div>
+
+  </div>
+</nav>

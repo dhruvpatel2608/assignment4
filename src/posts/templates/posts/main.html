@@ -2,6 +2,85 @@
 {% load static %}
 {% load crispy_forms_tags %}
  
+{% block extra_styles %}
+<style>
+  /* Buttons (Add Post & Load More) Matching Navbar Style */
+  .btn-custom {
+    border-radius: 50px;
+    padding: 8px 22px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-custom:hover {
+    transform: scale(1.07);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
+  }
+
+  /* Add specific background colors if needed */
+  .btn-custom.btn-light {
+    background-color: #ffffff;
+    color: #2d4739;
+    border-color: #cccccc;
+  }
+
+  .btn-custom.btn-primary {
+    background-color: #0066ff;
+    color: white;
+    border-color: #0056e0;
+  }
+
+  .btn-custom.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border-color: #b02a37;
+  }
+
+  .btn-custom.btn-success {
+    background-color: #198754;
+    color: white;
+    border-color: #157347;
+  }
+
+  /* Modal background and polish */
+  .modal-content {
+    background-color: #f3f6f4;
+    border-radius: 16px;
+    border: 1px solid #d6e0dc;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Spinner loader styling */
+  #spinner-box .spinner-border {
+    color: #2d4739;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  /* Dropzone enhancements */
+  .dz {
+    border: 2px dashed #ccc !important;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+
+  .dz:hover {
+    background-color: #e9f5f2 !important;
+  }
+
+  /* Alert styling (if used dynamically) */
+  #alert-box {
+    margin-bottom: 1rem;
+  }
+</style>
+{% endblock extra_styles %}
+
+
 {% block scripts %}
   <script src="{% static 'posts/main.js' %}" defer></script>
 {% endblock scripts %}
@@ -19,15 +98,21 @@ posts
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Create Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close add-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="post-form">
+                    <form id="post-form" autocomplete="off">
                         {% csrf_token %}
                         {{form|crispy}}
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-                            <button type="submit" class="btn btn-success">+ add</button>
+                            <button type="button" class="btn btn-danger add-modal-close" data-bs-dismiss="modal">close</button>
+                            <button type="submit" id="add-btn" class="btn btn-success">+ add</button>
+                        </div>
+                    </form>
+                    <form action="upload/" id="my-dropzone" class="dropzone dz not-visible">
+                        {% csrf_token %}
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
                         </div>
                     </form>
                 </div>
